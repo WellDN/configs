@@ -1,4 +1,4 @@
-function ColorMyPencils(color)
+function ColorApply(color)
 	color = color or "embark"
 	vim.cmd.colorscheme(color)
 
@@ -7,4 +7,4 @@ function ColorMyPencils(color)
 
 end
 
-ColorMyPencils()
+ColorApply()

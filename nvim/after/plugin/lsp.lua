@@ -143,12 +143,12 @@ lsp.ocamllsp.setup({
 })
 
 -- Diagnostic symbols in the sign column (gutter)
-local signs = { 
-    Error = " ", 
-    Warn = " ", 
+local signs = {
+    Error = " ",
+    Warn = " ",
     Info = " ",
-    Hint = " " 
-} 
+    Hint = " "
+}
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
@@ -187,9 +187,3 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
     vim.lsp.handlers.signature_help,
     {border = "rounded"}
 )
-
-vim.cmd [[ 
-" make hover window"s background transparent
-highlight! link FloatBorder Normal 
-highlight! link NormalFloat Normal 
-]]
