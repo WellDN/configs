@@ -65,7 +65,7 @@ fi
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;87m\]\w\[\033[00m\]\$ '
 else
-    PS1="\[\033[38;5;226m\]\w\[$(tput sgr0)\] \[$(tput sgr0)\]\[\033[38;5;87m\]\\$\[$(tput sgr0)\] \[$(tput sgr0)\]"
+    PS1="\[\033[0m\]\w\[$(tput sgr0)\] \[$(tput sgr0)\]\[\033[0m\]\\$\[$(tput sgr0)\] \[$(tput sgr0)\]"
 fi
 unset color_prompt force_color_prompt
 
