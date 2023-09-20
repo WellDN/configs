@@ -14,10 +14,10 @@ return require('packer').startup(function(use)
   }
 
   use({
-	  'danishprakash/vim-yami',
-	  as = 'yami',
+	  'nikolvs/vim-sunbather',
+	  as = 'sunbather',
 	  config = function()
-		  vim.cmd('colorscheme yami')
+		  vim.cmd('colorscheme sunbather')
 	  end
   })
 
