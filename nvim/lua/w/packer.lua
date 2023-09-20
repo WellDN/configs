@@ -14,10 +14,10 @@ return require('packer').startup(function(use)
   }
 
   use({
-	  'doki-theme/doki-theme-vim',
-	  as = 'tohsaka_rin',
+	  'danishprakash/vim-yami',
+	  as = 'yami',
 	  config = function()
-		  vim.cmd('colorscheme tohsaka_rin')
+		  vim.cmd('colorscheme yami')
 	  end
   })
 
