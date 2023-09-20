@@ -14,10 +14,10 @@ return require('packer').startup(function(use)
   }
 
   use({
-	  'embark-theme/vim',
-	  as = 'embark',
+	  'doki-theme/doki-theme-vim',
+	  as = 'tohsaka_rin',
 	  config = function()
-		  vim.cmd('colorscheme embark')
+		  vim.cmd('colorscheme tohsaka_rin')
 	  end
   })
 
