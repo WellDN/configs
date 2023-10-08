@@ -14,7 +14,7 @@ return require('packer').startup(function(use)
   }
 
   use({
-	  'nikolvs/vim-sunbather',
+	  'welldn/vim-sunbather',
 	  as = 'sunbather',
 	  config = function()
 		  vim.cmd('colorscheme sunbather')
