@@ -27,6 +27,14 @@ return require('packer').startup(function(use)
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
 
+  -- Debugger
+
+  use{'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
+  use 'theHamsta/nvim-dap-virtual-text'
+  use 'leoluz/nvim-dap-go'
+  require('dapui').setup()
+  require('dap-go').setup()
+
   use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  requires = {
