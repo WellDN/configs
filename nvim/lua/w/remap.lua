@@ -42,6 +42,7 @@ vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/the
 
 -- Debugger
 vim.api.nvim_set_keymap("n", "<leader>dt", ":DapUiToggle<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<leader>db", ":DapToogleBreakpoint<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>db", ":DapToggleBreakpoint<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>dc", ":DapContinue<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>dr", ":lua require('dapui').open({reset = true})<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>dr", ":lua require('dapui').close({reset = true})<CR>", {noremap=true})

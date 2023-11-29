@@ -28,7 +28,6 @@ return require('packer').startup(function(use)
   use('tpope/vim-fugitive')
 
   -- Debugger
-
   use{'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
   use 'theHamsta/nvim-dap-virtual-text'
   use 'leoluz/nvim-dap-go'
