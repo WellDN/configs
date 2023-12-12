@@ -8,7 +8,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
+	  'nvim-telescope/telescope.nvim',
 	  -- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
@@ -28,12 +28,24 @@ return require('packer').startup(function(use)
   use('tpope/vim-fugitive')
 
   -- Debugger
-  use{'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
   use 'theHamsta/nvim-dap-virtual-text'
   use 'leoluz/nvim-dap-go'
-  require('dapui').setup()
+
   require('dap-go').setup()
 
+  local dap, dapui = require("dap"), require("dapui")
+  dap.listeners.after.event_initialized["dapui_config"] = function()
+      dapui.open()
+  end
+  dap.listeners.before.event_terminated["dapui_config"] = function()
+      dapui.close()
+  end
+  dap.listeners.before.event_exited["dapui_config"] = function()
+      dapui.close()
+  end
+
+  -- LSP
   use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  requires = {
