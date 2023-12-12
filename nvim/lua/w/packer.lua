@@ -32,6 +32,7 @@ return require('packer').startup(function(use)
   use 'theHamsta/nvim-dap-virtual-text'
   use 'leoluz/nvim-dap-go'
 
+  require('dapui').setup()
   require('dap-go').setup()
 
   local dap, dapui = require("dap"), require("dapui")
