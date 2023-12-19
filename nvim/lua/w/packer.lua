@@ -27,24 +27,6 @@ return require('packer').startup(function(use)
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
 
-  -- Debugger
-  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-  use 'theHamsta/nvim-dap-virtual-text'
-  use 'leoluz/nvim-dap-go'
-
-  require('dapui').setup()
-  require('dap-go').setup()
-
-  local dap, dapui = require("dap"), require("dapui")
-  dap.listeners.after.event_initialized["dapui_config"] = function()
-      dapui.open()
-  end
-  dap.listeners.before.event_terminated["dapui_config"] = function()
-      dapui.close()
-  end
-  dap.listeners.before.event_exited["dapui_config"] = function()
-      dapui.close()
-  end
 
   -- LSP
   use {
