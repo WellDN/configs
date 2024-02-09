@@ -198,3 +198,5 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
     vim.lsp.handlers.signature_help,
     {border = "rounded"}
 )
+-- disable lsp log level msg
+vim.lsp.set_log_level("off")
