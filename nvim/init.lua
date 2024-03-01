@@ -1,1 +1,12 @@
-require("w");
+require("keymaps")
+require("set")
+require("plugins.lazy")
+require("plugins.telescope")
+require("plugins.fugitive")
+require("plugins.lsp")
+require("plugins.colors")
+require("plugins.harpoon")
+require("plugins.treesitter")
+require("plugins.undotree")
+require("plugins.dap")
+require("plugins.gitsigns")

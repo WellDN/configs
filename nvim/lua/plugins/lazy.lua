@@ -1,42 +1,72 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
--- Only required if you have packer configured as `opt`
-vim.cmd.packadd('packer.nvim')
+-- Package manager
+require("lazy").setup({
 
-return require('packer').startup(function(use)
-    -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
 
-    use {
-        'nvim-telescope/telescope.nvim',
-        -- or                            , branch = '0.1.x',
-        requires = { {'nvim-lua/plenary.nvim'} }
-    }
+    { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
+    'nvim-telescope/telescope-symbols.nvim',
 
-    use({
+    {
+        "folke/todo-comments.nvim",
+        dependencies = "nvim-lua/plenary.nvim",
+        lazy = false,
+        config = function()
+            require("todo-comments").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    },
+
+
+    ({
         'welldn/vim-sunbather',
         as = 'sunbather',
         config = function()
             vim.cmd('colorscheme sunbather')
         end
-    })
+    }),
 
-    use({'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'})
-    use('nvim-treesitter/playground')
-    use('theprimeagen/harpoon')
-    use('mbbill/undotree')
-    use('tpope/vim-fugitive')
+    {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'},
+    {'nvim-treesitter/playground'},
+    {'theprimeagen/harpoon'},
+    {'mbbill/undotree'},
 
     -- Debugger
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-    use 'leoluz/nvim-dap-go'
-    use 'theHamsta/nvim-dap-virtual-text'
-    require('dapui').setup()
-    require('dap-go').setup()
-    require('nvim-dap-virtual-text').setup()
+    { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap"} },
+    'theHamsta/nvim-dap-virtual-text',
+    'leoluz/nvim-dap-go',
 
-    -- LSP
-    use {
+     { -- LSP Configuration & Plugins
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      -- Automatically install LSPs to stdpath for neovim
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+
+      -- Useful status updates for LSP
+      'j-hui/fidget.nvim',
+    }
+  },
+  { -- Autocompletion
+  'hrsh7th/nvim-cmp',
+  dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+  },
+    -- LSP (yes two lsp setups so what)
+     {
         'VonHeikemen/lsp-zero.nvim',
         requires = {
             -- LSP Support
@@ -56,25 +86,25 @@ return require('packer').startup(function(use)
             {'L3MON4D3/LuaSnip'},
             {'rafamadriz/friendly-snippets'},
         }
-    }
+    },
 
-    use("folke/zen-mode.nvim")
+    ("folke/zen-mode.nvim"),
 
-    use {
+     {
         "folke/trouble.nvim",
         requires = "nvim-tree/nvim-web-devicons",
         config = function()
             require("trouble").setup {
                 -- your configuration comes here
-                -- or leave it empty to use the default settings
+                -- or leave it empty to  the default settings
                 -- refer to the configuration section below
                 position = "bottom", -- position of the list can be: bottom, top, left, right
                 height = 10, -- height of the trouble list when position is top or bottom
                 width = 50, -- width of the list when position is left or right
-                icons = true, -- use devicons for filenames
+                icons = true, --  devicons for filenames
                 mode = "workspace_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
-                fold_open = "", -- icon used for open folds
-                fold_closed = "", -- icon used for closed folds
+                fold_open = "", -- icon d for open folds
+                fold_closed = "", -- icon d for closed folds
                 group = true, -- group results by file
                 padding = true, -- add an extra new line on top of the list
                 action_keys = { -- key mappings for actions in the trouble list
@@ -105,14 +135,14 @@ return require('packer').startup(function(use)
             auto_fold = false, -- automatically fold a file trouble list at creation
             auto_jump = {"lsp_definitions"}, -- for the given modes, automatically jump if there is only a single result
             signs = {
-                -- icons / text used for a diagnostic
+                -- icons / text d for a diagnostic
                 error = "",
                 warning = "",
                 hint = "",
                 information = "",
                 other = "﫠"
             },
-            use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+            _diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
         }
         vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
         {silent = true, noremap = true}
@@ -133,7 +163,29 @@ return require('packer').startup(function(use)
         {silent = true, noremap = true}
         )
     end
-}
+},
+
+-- Database Interface
+'tpope/vim-dadbod',
+'kristijanhusak/vim-dadbod-ui',
+'kristijanhusak/vim-dadbod-completion',
+
+{
+    "tpope/vim-dadbod",
+    opt = true,
+    requires = {
+        "kristijanhusak/vim-dadbod-ui",
+        "kristijanhusak/vim-dadbod-completion",
+    },
+    config = function()
+        require("config.dadbod").setup()
+    end,
+},
+
+-- Git
+'lewis6991/gitsigns.nvim',
+
+'tpope/vim-fugitive',
 
 
-end)
+})

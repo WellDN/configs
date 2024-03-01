@@ -41,9 +41,10 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
 
 -- Debugger
-vim.api.nvim_set_keymap("n", "<leader>dt", ":DapUiToggle<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>dt", ":lua require('dapui').toggle()<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>db", ":DapToggleBreakpoint<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>dc", ":DapContinue<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<leader>dr", ":lua require('dapui').open({reset = true})<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<leader>dr", ":lua require('dapui').close({reset = true})<CR>", {noremap=true})
-vim.fn.sign_define('DapBreakpoint', { text='🔴', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+vim.api.nvim_set_keymap("n", "<leader>di", ":lua require('dap').step_into()<cr>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>dx", ":lua require('dap').step_back()<cr>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>do", ":lua require('dap').step_out()<cr>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>de", ":lua require('dapui').eval()<cr>", {noremap=true})
