@@ -8,13 +8,17 @@ sudo apt install cargo
 # clone the repo
 git clone https://github.com/zenixls2/alacritty
 
+# Download fonts from git, pass the font globally
+git clone https://github.com/WellDN/configs/tree/main/fonts
+cd ~/.config
+cp -R .config/configs/fonts/* /usr/share/fonts
+
 # build the ligature
 cd alacritty
 git checkout ligature
 cargo build --release
 
 #install binary
-
 # backup the existing binary
 sudo mv /usr/bin/alacritty /usr/bin/alacritty.bak
 
