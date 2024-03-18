@@ -26,7 +26,6 @@ sudo mv /usr/bin/alacritty /usr/bin/alacritty.bak
 sudo cp ./target/release/alacritty /usr/bin
 
 # Auto-completion
-sudo apt install gawk
-git clone --recursive https://github.com/akinomyoga/ble.sh.git
-make -C ble.sh
-source ble.sh/out/ble.sh
+git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git
+make -C ble.sh install PREFIX=~/.local
+echo 'source ~/.local/share/blesh/ble.sh' >> ~/.bashrc
