@@ -12,7 +12,7 @@ lsp.preset("recommended")
    require('mason-lspconfig').setup({
      -- Replace the language servers listed here
      -- with the ones you want to install
-     ensure_installed = {'tsserver', 'rust_analyzer','lua_ls', 'gopls' },
+     ensure_installed = {'rust_analyzer','lua_ls', 'gopls' },
      handlers = {
        lsp.default_setup,
      },
@@ -32,7 +32,7 @@ lsp.configure('lua_ls', {
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
-local cmp_mappings = lsp.defaults.cmp_mappings({
+local cmp_mappings = cmp.mapping.preset.insert({
   ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
   ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
   ['<C-y>'] = cmp.mapping.confirm({ select = true }),
@@ -48,7 +48,7 @@ lsp.setup({
   mapping = cmp_mappings
 })
 
-lsp.set_preferences({
+vim.diagnostic.config({
     suggest_lsp_servers = false,
     sign_icons = {
         error = 'E',
@@ -200,3 +200,5 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 )
 -- disable lsp log level msg
 vim.lsp.set_log_level("off")
+
+
